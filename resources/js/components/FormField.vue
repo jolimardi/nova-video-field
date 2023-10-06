@@ -12,7 +12,7 @@
 </template>
 
 <script>
-//import { FormField, HandlesValidationErrors } from 'laravel-nova'
+import { FormField, HandlesValidationErrors } from 'laravel-nova'
 import axios from 'axios'
 
 export default {
