@@ -1,17 +1,17 @@
 <?php
 
-namespace JoliMardi\NovaYoutubeField;
+namespace JoliMardi\NovaVideoField;
 
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class NovaYoutubeField extends Field {
+class NovaVideoField extends Field {
     /**
      * The field's component.
      *
      * @var string
      */
-    public $component = 'nova-youtube-field';
+    public $component = 'nova-video-field';
 
     protected $modelAttribute = 'video';
 
@@ -46,6 +46,6 @@ class NovaYoutubeField extends Field {
     public function fill(\Laravel\Nova\Http\Requests\NovaRequest $request, $model) {
         $videoUrl = $request[$this->attribute];
 
-        app(\JoliMardi\NovaYoutubeField\Services\VideoService::class)->fetchAndSaveVideoData($videoUrl, $model, $this->modelAttribute);
+        app(\JoliMardi\NovaVideoField\Services\VideoService::class)->fetchAndSaveVideoData($videoUrl, $model, $this->modelAttribute);
     }
 }

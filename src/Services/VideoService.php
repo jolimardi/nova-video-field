@@ -1,6 +1,6 @@
 <?php
 
-namespace JoliMardi\NovaYoutubeField\Services;
+namespace JoliMardi\NovaVideoField\Services;
 
 use JsonException;
 use GuzzleHttp\Client;

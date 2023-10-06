@@ -1,11 +1,11 @@
 <?php
 
-namespace JoliMardi\NovaYoutubeField;
+namespace JoliMardi\NovaVideoField;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\ServiceProvider;
-use JoliMardi\NovaYoutubeField\Services\VideoService;
+use JoliMardi\NovaVideoField\Services\VideoService;
 
 class FieldServiceProvider extends ServiceProvider {
     /**
@@ -15,8 +15,8 @@ class FieldServiceProvider extends ServiceProvider {
      */
     public function boot() {
         Nova::serving(function (ServingNova $event) {
-            Nova::script('youtube-field', __DIR__ . '/../dist/js/field.js');
-            Nova::style('youtube-field', __DIR__ . '/../dist/css/field.css');
+            Nova::script('video-field', __DIR__ . '/../dist/js/field.js');
+            Nova::style('video-field', __DIR__ . '/../dist/css/field.css');
         });
     }
 

@@ -12,13 +12,13 @@
     },
     "autoload": {
         "psr-4": {
-            "JoliMardi\\NovaYoutubeField\\": "src/"
+            "JoliMardi\\NovaVideoField\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "JoliMardi\\NovaYoutubeField\\FieldServiceProvider"
+                "JoliMardi\\NovaVideoField\\FieldServiceProvider"
             ]
         }
     },
