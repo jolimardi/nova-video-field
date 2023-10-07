@@ -7,7 +7,7 @@ use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\ServiceProvider;
 use JoliMardi\NovaVideoField\Services\VideoService;
 use JoliMardi\NovaVideoField\Services\FetchController;
-
+use Illuminate\Support\Facades\Route;
 
 class FieldServiceProvider extends ServiceProvider {
     /**
