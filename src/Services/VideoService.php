@@ -17,7 +17,7 @@ class VideoService {
         $this->vimeoToken = $vimeoToken;
     }
 
-    public function fetchAndSaveVideoData($url, $model, $attributeName = 'video') {
+    public function fetchAndSaveVideoData($url) {
         $dataToStore = [
             'url' => $url,
             'title' => null,
@@ -37,8 +37,7 @@ class VideoService {
                 $dataToStore['thumbnail'] = $data['thumbnail'];
             }
 
-            $model->$attributeName = json_encode($dataToStore);
-            $model->save();
+            return json_encode($dataToStore);
         } catch (\Exception $e) {
             throw new \Exception('Erreur lors de la récupération des données de la vidéo. Détails : ' . $e->getMessage());
         }

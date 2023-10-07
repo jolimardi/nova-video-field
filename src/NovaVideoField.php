@@ -3,6 +3,7 @@
 namespace JoliMardi\NovaVideoField;
 
 use Laravel\Nova\Fields\Field;
+use Illuminate\Support\Str;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class NovaVideoField extends Field {
@@ -13,12 +14,12 @@ class NovaVideoField extends Field {
      */
     public $component = 'nova-video-field';
 
-    /*protected $modelAttribute = 'video';
+    protected $modelAttribute = 'video';
 
     public function setModelAttribute($attributeName) {
         $this->modelAttribute = $attributeName;
         return $this;
-    }*/
+    }
 
     /**
      * Resolve the field's value.
@@ -38,16 +39,27 @@ class NovaVideoField extends Field {
         return $this;
     }
 
+
     /**
-     * Fill a field's value on an attached resource during an update or creation request.
+     * Fill the model's attribute with data.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @param  $model
+     * @param  \Illuminate\Database\Eloquent\Model|\Laravel\Nova\Support\Fluent  $model
+     * @param  mixed  $value
+     * @param  string  $attribute
      * @return void
      */
-    public function fill(\Laravel\Nova\Http\Requests\NovaRequest $request, $model) {
-        $videoUrl = $request[$this->attribute];
+    public function fillModelWithData(mixed $model, mixed $value, string $attribute) {
 
-        app(\JoliMardi\NovaVideoField\Services\VideoService::class)->fetchAndSaveVideoData($videoUrl, $model, $this->modelAttribute);
+        $videoUrl = $value;
+
+        $processed_value = app(\JoliMardi\NovaVideoField\Services\VideoService::class)->fetchAndSaveVideoData($videoUrl);
+
+        if ($processed_value) {
+
+            $attributes = [Str::replace('.', '->', $attribute) => $processed_value];
+
+            $model->forceFill($attributes);
+        }
     }
+
 }
