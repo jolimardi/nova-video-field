@@ -43,7 +43,7 @@ export default {
 
     async fetchVideoData() {
       try {
-        let response = await axios.get('/fetch-video-data', {
+        let response = await axios.get('/jolimardi/nova-video-field/fetch', {
           params: {
             url: this.value
           }

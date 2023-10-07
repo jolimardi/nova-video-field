@@ -6,6 +6,8 @@ use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\ServiceProvider;
 use JoliMardi\NovaVideoField\Services\VideoService;
+use JoliMardi\NovaVideoField\Services\FetchController;
+
 
 class FieldServiceProvider extends ServiceProvider {
     /**
@@ -18,6 +20,9 @@ class FieldServiceProvider extends ServiceProvider {
             Nova::script('nova-video-field', __DIR__ . '/../dist/js/field.js');
             Nova::style('nova-video-field', __DIR__ . '/../dist/css/field.css');
         });
+
+        // Route pour fetch les datas de la vidéo
+        Route::get('jolimardi/nova-video-field/fetch', FetchController::class);
     }
 
     /**
@@ -30,8 +35,8 @@ class FieldServiceProvider extends ServiceProvider {
             try {
                 $client = new \GuzzleHttp\Client();
 
-                $youtubeApiKey = config('services.youtube.api_key');
-                $vimeoToken = config('services.vimeo.token');
+                $youtubeApiKey = ENV('YOUTUBE_API_KEY');
+                $vimeoToken = ENV('VIMEO_TOKEN');
 
                 if (empty($youtubeApiKey)) {
                     throw new \RuntimeException('La clé API YouTube est manquante dans la configuration.');
