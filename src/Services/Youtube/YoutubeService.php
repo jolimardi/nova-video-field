@@ -52,6 +52,7 @@ class YoutubeService implements VideoServiceInterface {
             $video_data->setVideoId($video_id);
             $video_data->setTitle($response['items'][0]['snippet']['title']);
             $video_data->setThumbnailUrl($response['items'][0]['snippet']['thumbnails']['maxres']['url'] ?? null);
+            $video_data->setService('youtube');
 
             return $video_data;
 
