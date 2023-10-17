@@ -14,12 +14,12 @@ class NovaVideoField extends Field {
      */
     public $component = 'nova-video-field';
 
-    protected $modelAttribute = 'video';
+    //protected $modelAttribute = 'video';
 
-    public function setModelAttribute($attributeName) {
+    /*public function setModelAttribute($attributeName) {
         $this->modelAttribute = $attributeName;
         return $this;
-    }
+    }*/
 
     /**
      * Resolve the field's value.
@@ -28,7 +28,7 @@ class NovaVideoField extends Field {
      * @param  string|null  $attribute
      * @return $this
      */
-    public function resolve($resource, $attribute = null) {
+    /*public function resolve($resource, $attribute = null) {
         parent::resolve($resource, $attribute);
 
         $data = json_decode($this->value, true);
@@ -37,7 +37,7 @@ class NovaVideoField extends Field {
         }
 
         return $this;
-    }
+    }*/
 
 
     /**
@@ -48,7 +48,7 @@ class NovaVideoField extends Field {
      * @param  string  $attribute
      * @return void
      */
-    public function fillModelWithData(mixed $model, mixed $value, string $attribute) {
+    /*public function fillModelWithData(mixed $model, mixed $value, string $attribute) {
 
         $videoUrl = $value;
 
@@ -60,6 +60,6 @@ class NovaVideoField extends Field {
 
             $model->forceFill($attributes);
         }
-    }
+    }*/
 
 }
