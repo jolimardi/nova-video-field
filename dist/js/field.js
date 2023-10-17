@@ -209,7 +209,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   key: 0,
-  "class": "videos-list pt-3 pb-4"
+  "class": "videos-list pb-4"
 };
 var _hoisted_2 = {
   "class": "video"
@@ -261,13 +261,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), 256 /* UNKEYED_FRAGMENT */))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Champ d'ajout de vidéo "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         id: $props.field.attribute,
         type: "text",
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["w-full form-control form-input form-input-bordered", _ctx.errorClasses]),
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["max-w-md w-full form-control form-input form-input-bordered", _ctx.errorClasses]),
         placeholder: "Lien Youtube ou Vimeo",
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $data.newUrl = $event;
         })
       }, null, 10 /* CLASS, PROPS */, _hoisted_8), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.newUrl]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-        "class": "bg-primary-500 hover:bg-gray-300 text-red-600 text-center text-gray-800 py-2 px-4 rounded cursor-pointer text-sm justify-center text-white dark:text-gray-800 font-bold shadow bg-primary-500 hover:bg-primary-400 active:bg-primary-600 text-white dark:text-gray-800 block",
+        "class": "max-w-md bg-primary-500 hover:bg-gray-300 text-red-600 text-center text-gray-800 py-2 px-4 rounded cursor-pointer text-sm justify-center text-white dark:text-gray-800 font-bold shadow bg-primary-500 hover:bg-primary-400 active:bg-primary-600 text-white dark:text-gray-800 block",
         onClick: _cache[1] || (_cache[1] = function () {
           return $options.fetchVideoData && $options.fetchVideoData.apply($options, arguments);
         })
@@ -3833,7 +3833,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.video {\r\n    border: 1px solid #ddd;\r\n    border-radius: 6px;\r\n    overflow: hidden;\r\n    width: 370px;\r\n    max-width: 100%;\r\n    margin: 16px 16px;\nimg {\r\n        aspect-ratio: 16/8;\r\n        -o-object-fit: contain;\r\n           object-fit: contain;\n}\n}\n.videos-list {\r\n    display: flex;\r\n    flex-wrap: wrap;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.video {\r\n    border: 1px solid #ddd;\r\n    border-radius: 6px;\r\n    overflow: hidden;\r\n    width: 370px;\r\n    max-width: 100%;\nimg {\r\n        aspect-ratio: 16/8;\r\n        -o-object-fit: contain;\r\n           object-fit: contain;\n}\n}\n.videos-list {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    gap: 20px 16px;\r\n    margin-top: 16px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

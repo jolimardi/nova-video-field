@@ -44,11 +44,11 @@ class FetchController {
                 'classname' => 'JoliMardi\NovaVideoField\Services\Youtube\YoutubeService',
                 'apikey' => ENV('YOUTUBE_API_KEY')
             ],
-            'vimeo' => [
+            /*'vimeo' => [
                 'title' => 'Vimeo',
                 'classname' => 'Vimeo\VimeoService',
                 'apikey' => ENV('VIMEO_TOKEN')
-            ],
+            ],*/
         ];
         // Convert to object
         $services = json_decode(json_encode($services));

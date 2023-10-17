@@ -5,7 +5,7 @@
 
             <!-- Affichage des vidéos déjà enregistrées -->
 
-            <div class="videos-list pt-3 pb-4" v-if="videos.length > 0">
+            <div class="videos-list pb-4" v-if="videos.length > 0">
                 <div v-for="(video, index) in videos">
                     <div class="video">
 
@@ -29,9 +29,9 @@
 
             <!-- Champ d'ajout de vidéo -->
 
-            <input :id="field.attribute" type="text" class="w-full form-control form-input form-input-bordered" :class="errorClasses" placeholder="Lien Youtube ou Vimeo" v-model="newUrl" />
+            <input :id="field.attribute" type="text" class="max-w-md w-full form-control form-input form-input-bordered" :class="errorClasses" placeholder="Lien Youtube ou Vimeo" v-model="newUrl" />
 
-            <span class="bg-primary-500 hover:bg-gray-300 text-red-600 text-center text-gray-800 py-2 px-4 rounded cursor-pointer text-sm justify-center text-white dark:text-gray-800 font-bold shadow bg-primary-500 hover:bg-primary-400 active:bg-primary-600 text-white dark:text-gray-800 block" @click="fetchVideoData">
+            <span class="max-w-md bg-primary-500 hover:bg-gray-300 text-red-600 text-center text-gray-800 py-2 px-4 rounded cursor-pointer text-sm justify-center text-white dark:text-gray-800 font-bold shadow bg-primary-500 hover:bg-primary-400 active:bg-primary-600 text-white dark:text-gray-800 block" @click="fetchVideoData">
                 Ajouter
             </span>
 
@@ -146,7 +146,6 @@ export default {
     overflow: hidden;
     width: 370px;
     max-width: 100%;
-    margin: 16px 16px;
 
     img {
         aspect-ratio: 16/8;
@@ -156,5 +155,7 @@ export default {
 .videos-list {
     display: flex;
     flex-wrap: wrap;
+    gap: 20px 16px;
+    margin-top: 16px;
 }
 </style>
