@@ -4,6 +4,7 @@ namespace JoliMardi\NovaVideoField;
 
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use JoliMardi\NovaVideoField\Services\VideoData;
 
 class FetchController {
@@ -39,13 +40,15 @@ class FetchController {
 
         // Classnames des services et API Keys
         $services = [
-            'youtube' => [
+            [
                 'title' => 'Youtube',
+                'machine_name' => 'youtube',
                 'classname' => 'JoliMardi\NovaVideoField\Services\Youtube\YoutubeService',
                 'apikey' => ENV('YOUTUBE_API_KEY')
             ],
-            'vimeo' => [
+            [
                 'title' => 'Vimeo',
+                'machine_name' => 'vimeo',
                 'classname' => 'JoliMardi\NovaVideoField\Services\Vimeo\VimeoService',
                 'apikey' => ENV('VIMEO_TOKEN')
             ],
@@ -79,9 +82,32 @@ class FetchController {
             throw new Exception("$currentService->title : La clé d'Api est manquante dans la configuration (YOUTUBE_API_KEY ou VIMEO_TOKEN).");
         }
         $service->setApiKey($currentService->apikey);
-        
+
         $videoData = $service->fetchVideoData($video_id);
+
+        // On ajoute quelques infos :
+
+        // url originale
         $videoData->original_url = $url;
+
+        // Nom du service utilisé
+        $videoData->setService($currentService->machine_name);
+
+        // On copie la thumbnail en local et on remplace le nom
+        $url = $videoData->thumbnail_url;
+        $extension = pathinfo($url, PATHINFO_EXTENSION);
+        
+        // Petit fix pour Vimeo qui n'a pas d'extension
+        if($currentService->machine_name == 'vimeo' && empty($extension)){
+            $url = strtok($url, '?'); // On enlève tout ce qui est get
+            $url = $url . '.jpg';
+            $extension = 'jpg';
+        }
+
+        // On copie dans storage/app/public/{service}/{video_id}.$ext et on le met dans VideoData
+        $path = "public/{$currentService->machine_name}/{$videoData->video_id}.{$extension}"; // vimeo/{video_id}.jpg
+        Storage::disk('local')->put($path, file_get_contents($url));
+        $videoData->thumbnail_url = Storage::url($path);
 
         return $videoData;
     }

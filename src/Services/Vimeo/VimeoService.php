@@ -60,7 +60,6 @@ class VimeoService implements VideoServiceInterface {
             $video_data = new VideoData();
             $video_data->setVideoId($video_id);
             $video_data->setTitle($parsedJson['name']);
-            $video_data->setService('vimeo');
 
             $last_thumbnail_index = count($parsedJson['pictures']['sizes']) - 1;
             $video_data->setThumbnailUrl($parsedJson['pictures']['sizes'][$last_thumbnail_index]['link'] ?? null);
