@@ -29,11 +29,13 @@
 
             <!-- Champ d'ajout de vidéo -->
 
-            <input :id="field.attribute" type="text" class="max-w-md w-full form-control form-input form-input-bordered" :class="errorClasses" placeholder="Lien Youtube ou Vimeo" v-model="newUrl" />
+            <div v-if="multiple || videos.length < 1">
+                <input :id="field.attribute" type="text" class="max-w-md w-full form-control form-input form-input-bordered" :class="errorClasses" placeholder="Lien Youtube ou Vimeo" v-model="newUrl" />
 
-            <span class="max-w-md bg-primary-500 hover:bg-gray-300 text-red-600 text-center text-gray-800 py-2 px-4 rounded cursor-pointer text-sm justify-center text-white dark:text-gray-800 font-bold shadow bg-primary-500 hover:bg-primary-400 active:bg-primary-600 text-white dark:text-gray-800 block" @click="fetchVideoData">
-                Ajouter
-            </span>
+                <span class="max-w-md bg-primary-500 hover:bg-gray-300 text-red-600 text-center text-gray-800 py-2 px-4 rounded cursor-pointer text-sm justify-center text-white dark:text-gray-800 font-bold shadow bg-primary-500 hover:bg-primary-400 active:bg-primary-600 text-white dark:text-gray-800 block" @click="fetchVideoData">
+                    Ajouter
+                </span>
+            </div>
 
 
             <!-- Champ d'erreur via JS -->
@@ -65,7 +67,8 @@ export default {
             videos: [],
             newVideoData: null,
             error: null,
-            newUrl: ''
+            newUrl: '',
+            multiple: this.field.multiple ? true : false,
         };
     },
 
@@ -86,6 +89,9 @@ export default {
         setInitialValue() {
             this.value = this.field.value || '';
             this.videos = JSON.parse(this.value);
+            if (!this.multiple) {
+                this.videos = this.videos.slice(0, 1);
+            }
         },
 
         /**

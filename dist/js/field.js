@@ -59,7 +59,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       videos: [],
       newVideoData: null,
       error: null,
-      newUrl: ''
+      newUrl: '',
+      multiple: this.field.multiple ? true : false
     };
   },
   watch: {
@@ -78,6 +79,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     setInitialValue: function setInitialValue() {
       this.value = this.field.value || '';
       this.videos = JSON.parse(this.value);
+      if (!this.multiple) {
+        this.videos = this.videos.slice(0, 1);
+      }
     },
     /**
      * Fill the given FormData object with the field's internal value.
@@ -223,13 +227,16 @@ var _hoisted_6 = {
   "class": "actions text-right"
 };
 var _hoisted_7 = ["onClick"];
-var _hoisted_8 = ["id"];
-var _hoisted_9 = ["innerHTML"];
-var _hoisted_10 = {
-  key: 2,
+var _hoisted_8 = {
+  key: 1
+};
+var _hoisted_9 = ["id"];
+var _hoisted_10 = ["innerHTML"];
+var _hoisted_11 = {
+  key: 3,
   "class": "my-2 text-red-600"
 };
-var _hoisted_11 = ["id"];
+var _hoisted_12 = ["id"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
   var _component_DefaultField = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DefaultField");
@@ -258,7 +265,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             return $options.deleteVideo(index, _this);
           }
         }, " Supprimer ", 8 /* PROPS */, _hoisted_7)])])])]);
-      }), 256 /* UNKEYED_FRAGMENT */))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Champ d'ajout de vidéo "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }), 256 /* UNKEYED_FRAGMENT */))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Champ d'ajout de vidéo "), $data.multiple || $data.videos.length < 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         id: $props.field.attribute,
         type: "text",
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["max-w-md w-full form-control form-input form-input-bordered", _ctx.errorClasses]),
@@ -266,22 +273,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $data.newUrl = $event;
         })
-      }, null, 10 /* CLASS, PROPS */, _hoisted_8), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.newUrl]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      }, null, 10 /* CLASS, PROPS */, _hoisted_9), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.newUrl]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         "class": "max-w-md bg-primary-500 hover:bg-gray-300 text-red-600 text-center text-gray-800 py-2 px-4 rounded cursor-pointer text-sm justify-center text-white dark:text-gray-800 font-bold shadow bg-primary-500 hover:bg-primary-400 active:bg-primary-600 text-white dark:text-gray-800 block",
         onClick: _cache[1] || (_cache[1] = function () {
           return $options.fetchVideoData && $options.fetchVideoData.apply($options, arguments);
         })
-      }, " Ajouter "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Champ d'erreur via JS "), $data.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", {
-        key: 1,
+      }, " Ajouter ")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Champ d'erreur via JS "), $data.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", {
+        key: 2,
         "class": "my-2 text-red-600",
         innerHTML: $data.error
-      }, null, 8 /* PROPS */, _hoisted_9)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Champ d'erreur via PHP (pas utile normalement) "), _ctx.hasError ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.firstError), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Champ hidden qui contient le JSON final "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }, null, 8 /* PROPS */, _hoisted_10)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Champ d'erreur via PHP (pas utile normalement) "), _ctx.hasError ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.firstError), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Champ hidden qui contient le JSON final "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         id: $props.field.attribute,
         type: "hidden",
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return _ctx.value = $event;
         })
-      }, null, 8 /* PROPS */, _hoisted_11), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.value]])];
+      }, null, 8 /* PROPS */, _hoisted_12), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.value]])];
     }),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["field", "errors", "show-help-text", "full-width-content"]);
@@ -7986,75 +7993,43 @@ function cloneDeep(object) {
 /* eslint no-invalid-this: 1 */
 
 var ERROR_MESSAGE = 'Function.prototype.bind called on incompatible ';
+var slice = Array.prototype.slice;
 var toStr = Object.prototype.toString;
-var max = Math.max;
 var funcType = '[object Function]';
-
-var concatty = function concatty(a, b) {
-    var arr = [];
-
-    for (var i = 0; i < a.length; i += 1) {
-        arr[i] = a[i];
-    }
-    for (var j = 0; j < b.length; j += 1) {
-        arr[j + a.length] = b[j];
-    }
-
-    return arr;
-};
-
-var slicy = function slicy(arrLike, offset) {
-    var arr = [];
-    for (var i = offset || 0, j = 0; i < arrLike.length; i += 1, j += 1) {
-        arr[j] = arrLike[i];
-    }
-    return arr;
-};
-
-var joiny = function (arr, joiner) {
-    var str = '';
-    for (var i = 0; i < arr.length; i += 1) {
-        str += arr[i];
-        if (i + 1 < arr.length) {
-            str += joiner;
-        }
-    }
-    return str;
-};
 
 module.exports = function bind(that) {
     var target = this;
-    if (typeof target !== 'function' || toStr.apply(target) !== funcType) {
+    if (typeof target !== 'function' || toStr.call(target) !== funcType) {
         throw new TypeError(ERROR_MESSAGE + target);
     }
-    var args = slicy(arguments, 1);
+    var args = slice.call(arguments, 1);
 
     var bound;
     var binder = function () {
         if (this instanceof bound) {
             var result = target.apply(
                 this,
-                concatty(args, arguments)
+                args.concat(slice.call(arguments))
             );
             if (Object(result) === result) {
                 return result;
             }
             return this;
+        } else {
+            return target.apply(
+                that,
+                args.concat(slice.call(arguments))
+            );
         }
-        return target.apply(
-            that,
-            concatty(args, arguments)
-        );
-
     };
 
-    var boundLength = max(0, target.length - args.length);
+    var boundLength = Math.max(0, target.length - args.length);
     var boundArgs = [];
     for (var i = 0; i < boundLength; i++) {
-        boundArgs[i] = '$' + i;
+        boundArgs.push('$' + i);
     }
 
-    bound = Function('binder', 'return function (' + joiny(boundArgs, ',') + '){ return binder.apply(this,arguments); }')(binder);
+    bound = Function('binder', 'return function (' + boundArgs.join(',') + '){ return binder.apply(this,arguments); }')(binder);
 
     if (target.prototype) {
         var Empty = function Empty() {};
@@ -8550,17 +8525,14 @@ module.exports = function hasSymbols() {
 /*!***************************************************************!*\
   !*** ../../vendor/laravel/nova/node_modules/has/src/index.js ***!
   \***************************************************************/
-/***/ ((module) => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var hasOwnProperty = {}.hasOwnProperty;
-var call = Function.prototype.call;
+var bind = __webpack_require__(/*! function-bind */ "../../vendor/laravel/nova/node_modules/function-bind/index.js");
 
-module.exports = call.bind ? call.bind(hasOwnProperty) : function (O, P) {
-  return call.call(hasOwnProperty, O, P);
-};
+module.exports = bind.call(Function.call, Object.prototype.hasOwnProperty);
 
 
 /***/ }),
@@ -14713,13 +14685,6 @@ module.exports = function inspect_(obj, options, depth, seen) {
     }
     if (isString(obj)) {
         return markBoxed(inspect(String(obj)));
-    }
-    if (obj === __webpack_require__.g) {
-        /* eslint-env browser */
-        if (typeof window !== 'undefined') {
-            return '{ [object Window] }';
-        }
-        return '{ [object global] }';
     }
     if (!isDate(obj) && !isRegExp(obj)) {
         var ys = arrObjKeys(obj, inspect);

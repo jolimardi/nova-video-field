@@ -7,6 +7,14 @@ use Illuminate\Support\Str;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class NovaVideoField extends Field {
+
+    public $multiple = false;
+
+    public function multiple(){
+        $this->multiple = true;
+        return $this->withMeta(['multiple' => $this->multiple]);;
+    }
+
     /**
      * The field's component.
      *
@@ -61,5 +69,4 @@ class NovaVideoField extends Field {
             $model->forceFill($attributes);
         }
     }*/
-
 }
