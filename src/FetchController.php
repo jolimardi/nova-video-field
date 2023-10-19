@@ -105,8 +105,8 @@ class FetchController {
         }
 
         // On copie dans storage/app/public/{service}/{video_id}.$ext et on le met dans VideoData
-        $path = "public/{$currentService->machine_name}/{$videoData->video_id}.{$extension}"; // vimeo/{video_id}.jpg
-        Storage::disk('local')->put($path, file_get_contents($url));
+        $path = "{$currentService->machine_name}/{$videoData->video_id}.{$extension}"; // vimeo/{video_id}.jpg
+        Storage::disk('public')->put($path, file_get_contents($url));
         $videoData->thumbnail_url = Storage::url($path);
 
         return $videoData;
