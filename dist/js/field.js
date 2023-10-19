@@ -77,9 +77,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      * Set the initial, internal value for the field.
      */
     setInitialValue: function setInitialValue() {
-      this.value = this.field.value || '';
-      this.videos = JSON.parse(this.value);
-      if (!this.multiple) {
+      this.value = this.field.value || [];
+      this.videos = this.value;
+      if (!this.multiple && this.video.length > 1) {
         this.videos = this.videos.slice(0, 1);
       }
     },
