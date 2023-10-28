@@ -22,7 +22,7 @@ class YoutubeService implements VideoServiceInterface {
 
     // Check if an url is valid for this video service (regexp check if possible)
     public static function isValidUrl(string $url): bool {
-        return preg_match('/^https:\/\/(?:.*?)\.?(youtube)\.com\/(watch\?[^#]*v=(\w+)|(\d+))/', $url);
+        return preg_match('/^https:\/\/(?:.*?)\.?(youtube)\.com\/(watch\?[^#]*v=([-\w]+)|(\d+))/', $url);
     }
 
     // Get video_id from a valid url
