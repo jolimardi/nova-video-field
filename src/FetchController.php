@@ -95,19 +95,23 @@ class FetchController {
 
         // On copie la thumbnail en local et on remplace le nom
         $url = $videoData->thumbnail_url;
-        $extension = pathinfo($url, PATHINFO_EXTENSION);
-        
-        // Petit fix pour Vimeo qui n'a pas d'extension
-        if($currentService->machine_name == 'vimeo' && empty($extension)){
-            $url = strtok($url, '?'); // On enlève tout ce qui est get
-            $url = $url . '.jpg';
-            $extension = 'jpg';
-        }
+        if (!empty($url)) {
+            $extension = pathinfo($url, PATHINFO_EXTENSION);
 
-        // On copie dans storage/app/public/{service}/{video_id}.$ext et on le met dans VideoData
-        $path = "{$currentService->machine_name}/{$videoData->video_id}.{$extension}"; // vimeo/{video_id}.jpg
-        Storage::disk('public')->put($path, file_get_contents($url));
-        $videoData->thumbnail_url = Storage::url($path);
+            // Petit fix pour Vimeo qui n'a pas d'extension
+            if ($currentService->machine_name == 'vimeo' && empty($extension)) {
+                $url = strtok($url, '?'); // On enlève tout ce qui est get
+                $url = $url . '.jpg';
+                $extension = 'jpg';
+            }
+
+            // On copie dans storage/app/public/{service}/{video_id}.$ext et on le met dans VideoData
+            $path = "{$currentService->machine_name}/{$videoData->video_id}.{$extension}"; // vimeo/{video_id}.jpg
+            Storage::disk('public')->put($path, file_get_contents($url));
+            $videoData->thumbnail_url = Storage::url($path);
+        } else {
+            $videoData->thumbnail_url = '';
+        }
 
         return $videoData;
     }

@@ -42,7 +42,7 @@ class YoutubeService implements VideoServiceInterface {
 
         try {
             $response = $client->get($apiUrl, ['verify' => false]); // @TODO ajouter la vérification SSL
-            
+
             if ($response->getStatusCode() !== 200) {
                 throw new \Exception('HTTP error: ' . $response->getReasonPhrase());
             }
@@ -51,10 +51,21 @@ class YoutubeService implements VideoServiceInterface {
             $video_data = new VideoData();
             $video_data->setVideoId($video_id);
             $video_data->setTitle($response['items'][0]['snippet']['title']);
-            $video_data->setThumbnailUrl($response['items'][0]['snippet']['thumbnails']['maxres']['url'] ?? null);
+
+            // Thumbnail, de la plus grande à la plus petite
+            if (isset($response['items'][0]['snippet']['thumbnails']['maxres']['url'])) {
+                $video_data->setThumbnailUrl($response['items'][0]['snippet']['thumbnails']['maxres']['url'] ?? null);
+            } elseif (isset($response['items'][0]['snippet']['thumbnails']['standard']['url'])) {
+                $video_data->setThumbnailUrl($response['items'][0]['snippet']['thumbnails']['standard']['url'] ?? null);
+            } elseif (isset($response['items'][0]['snippet']['thumbnails']['high']['url'])) {
+                $video_data->setThumbnailUrl($response['items'][0]['snippet']['thumbnails']['high']['url'] ?? null);
+            } elseif (isset($response['items'][0]['snippet']['thumbnails']['medium']['url'])) {
+                $video_data->setThumbnailUrl($response['items'][0]['snippet']['thumbnails']['medium']['url'] ?? null);
+            } elseif (isset($response['items'][0]['snippet']['thumbnails']['default']['url'])) {
+                $video_data->setThumbnailUrl($response['items'][0]['snippet']['thumbnails']['default']['url'] ?? null);
+            }
 
             return $video_data;
-
         } catch (RequestException $e) {
             throw new \Exception('Erreur de requête HTTP. Détails : ' . $e->getMessage() . ' API CALL');
         } catch (JsonException $e) {
@@ -103,5 +114,4 @@ class YoutubeService implements VideoServiceInterface {
 
         return $matches[2] ?? null;
     }*/
-
 }
