@@ -69,7 +69,12 @@ class FetchController {
         }
 
         if (!$service) {
-            throw new Exception("Impossible de récupérer l'ID de la vidéo (l'url ne correspond à aucun service). Est-ce que l'url est bien formatée ?<br><i>Ex. : https://www.youtube.com/watch?v=mYh6Soz3lA4 ou https://vimeo.com/161552105</i>");
+            // si l'url commence par https://www.youtube.com/playlist?, on met un autre message d'erreur
+            if(str_starts_with($url, 'https://www.youtube.com/playlist?list=')){
+                throw new Exception("Les playlists Youtube ne sont pas compatibles. Mettre un lien vers une vidéo unique. ($url)");
+            }
+
+            throw new Exception("Impossible de récupérer l'ID de la vidéo ($url ne correspond à aucun service). Est-ce que l'url est bien formatée ?<br><i>Ex. : https://www.youtube.com/watch?v=mYh6Soz3lA4 ou https://vimeo.com/161552105</i>");
         }
 
 
